@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<title>Grafik pendapatan perkapita</title>
+		<!--1) include file jquery.min.js dan higchart.js-->
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/highcharts.js"></script>
+
+		<script type="text/javascript">
+		//2)script untuk membuat grafik, perhatikan setiap komentar agar paham
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container', //letakan grafik di div id container
+				//Type grafik, anda bisa ganti menjadi area,bar,column dan bar
+                type: 'line',  
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: 'Pendapatan perkapita indonesia tahun 2006-2011',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'candra.web.id',
+                x: -20
+            },
+            xAxis: { //X axis menampilkan data tahun 
+                categories: ['2006', '2007', '2008','2009','2010','2011']
+            },
+            yAxis: {
+                title: {  //label yAxis
+                    text: 'pendapatan dalam USD'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080' //warna dari grafik line
+                }]
+            },
+            tooltip: { 
+			//fungsi tooltip, ini opsional, kegunaan dari fungsi ini 
+			//akan menampikan data di titik tertentu di grafik saat mouseover
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        this.x +': '+ this.y ;
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+			//series adalah data yang akan dibuatkan grafiknya,
+			//saat ini mungkin anda heran, buat apa label indonesia dikanan 
+			//grafik, namun fungsi label ini sangat bermanfaat jika
+			//kita menggambarkan dua atau lebih grafik dalam satu chart,
+			//hah, emang bisa? ya jelas bisa dong, lihat tutorial selanjutnya 
+            series: [{  
+                name: 'Indonesia',  
+				//data yang akan ditampilkan 
+                data: [1660, 1946,2271,2590,3004,3550]
+            }]
+        });
+    });
+    
+});
+		</script>
+	</head>
+	<body>
+
+<!--grafik akan ditampilkan disini -->
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id=link>
+
+
+<a href='linechart.html'>Grafik Garis</a>|
+<a href='areachart.html'>Grafik Area</a>|
+<a href='barchart.html'>Grafik Batang</a>|
+<a href='kolomchart.html'>Grafik Kolom</a>
+</div>
+	</body>
+</html>
